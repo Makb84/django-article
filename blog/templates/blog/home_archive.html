@@ -1,0 +1,43 @@
+{% comment %} this is html test {% endcomment %}
+{% comment %} {{article.username}}
+{%for article in articles%}
+
+    <article>
+        <h1>{{article.username}}</h1>
+    </article>
+
+{%endfor%} {% endcomment %}
+
+{% comment %} <center>
+    {% for article in articles %}
+    <article>
+        <h1>{{ article.id}}</h1>
+        <h1>{{ article.username }}</h1>
+        <p>Age: {{ article.age }}, Job: {{ article.job }}</p>
+        <img src="{{article.img}}"
+        <img src="{{article.thumbnail.url}}" alt="{{article.title}}" width="1000" height=1000>
+        <!-- You can add more details here -->
+    </article>
+    {% endfor %}
+</center> {% endcomment %}
+
+<style>
+    .article-description {
+        margin-bottom: 5em; /* You can adjust the value according to your preference */
+    }
+</style>
+
+<center>
+    {% for article in articles %}
+        <article>
+            <img src="{{article.thumbnail.url}}" alt="{{article.title}}" width="400" height="400">
+            <h1><a href="{% url 'blog:detail_article' article.slug %}">{{ article.title }}</a></h1> <!-- we can wright the path with hard coding like this: <a href="/article/{{article.slug}}">{{ article.title }}</a> -->
+            <small>{{article.publish}}
+            <p class="article-description">Descreption: {{ article.description }}</p>
+            <!-- You can add more details here -->
+        </article>
+    {% endfor %}
+</center>    
+
+
+
