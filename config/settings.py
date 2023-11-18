@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     # 'blog'    	#this will be worked but it will be better if we use this:          :]
     #this is blog app:
     'blog.apps.BlogConfig',
+
+    # add extensions
+    'extensions'
+
 ]
 
 MIDDLEWARE = [
