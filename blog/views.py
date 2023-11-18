@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from .models import Article
+from .models import Article, Category
 
 # Create your views here.
 
@@ -70,7 +70,9 @@ def home(request):
 
     context = {
         # "articles": Article.objects.all()
-        "articles": Article.objects.filter(status='p').order_by('-publish') # [:2] #bracket shows number of articles that we want to show
+        "articles": Article.objects.filter(status='p').order_by('-publish'), # [:2] #bracket shows number of articles that we want to show
+        "category": Category.objects.filter(status=True) # [:2] #bracket shows number of articles that we want to show
+
     }
 
     return render(request, "blog/home.html", context)
@@ -80,7 +82,8 @@ def detail(request, slug):
     context = {
         # "articles": Article.objects.all()
         # "article": Article.objects.get(slug=slug)
-        "article": get_object_or_404(Article, slug=slug, status="p")
+        "article": get_object_or_404(Article, slug=slug, status="p"),
+        "category": Category.objects.filter(status=True) # [:2] #bracket shows number of articles that we want to show
     }
 
     return render(request, "blog/detail.html", context)

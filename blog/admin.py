@@ -19,11 +19,16 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'jpublish', 'created', 'updated', 'status', 'category')
+    list_display = ('title', 'slug', 'jpublish', 'created', 'updated', 'status', 'category_to_str')
     list_filter = ('publish', 'status',)  # Note: list_filter should be a tuple, not a set
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}
     ordering = ['status', 'publish']
+
+    def category_to_str(self,obj):
+        return "، ".join([category.title for category in obj.category.all()])
+    category_to_str.short_description = "دسته بندی"
+
 
     def updated(self, obj):
         return obj.updated.strftime('%b %d, %Y %I:%M %p') if obj.updated else '-'
@@ -32,3 +37,5 @@ class ArticleAdmin(admin.ModelAdmin):
     updated.short_description = 'Last Updated'
 
 admin.site.register(Article, ArticleAdmin)
+
+
