@@ -2,6 +2,13 @@ from django.db import models
 from django.utils import timezone
 from extensions.utils import jalali_conventor
 
+
+# my manager
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status='p')
+
+
 # Create your models here.
 
 class Category(models.Model):
@@ -27,9 +34,12 @@ class Article(models.Model):
         ('p', 'منتشر شده')
 
     )
+
+    # Fields for the Article model
+    
     title = models.CharField(max_length=200, verbose_name= "عنوان مقاله")
     slug = models.SlugField(max_length=100, unique=True, verbose_name= "آدرس مقاله")
-    category = models.ManyToManyField(Category, verbose_name="دسته بندی")
+    category = models.ManyToManyField(Category, verbose_name="دسته بندی", related_name="articles")
     description = models.TextField(verbose_name= "عنوان مقاله")
     thumbnail = models.ImageField(upload_to="images", verbose_name= "تصویر مقاله")
     publish = models.DateTimeField(default=timezone.now, verbose_name= "زمان انتشار")
@@ -40,7 +50,9 @@ class Article(models.Model):
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = "مقاله ها"
-        
+    
+    
+    # Methods for the Article model
 
     def __str__(self):
         return self.title
@@ -50,3 +62,11 @@ class Article(models.Model):
         return jalali_conventor(self.publish)
     
     jpublish.short_description = "زمان انتشار"
+
+    def category_published(self):
+        return self.category.filter(status=True)
+    
+    
+    # Associate the custom manager with the Article model
+
+    objects = ArticleManager()
