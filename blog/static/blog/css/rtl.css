@@ -20,3 +20,12 @@ body {
 
     float: left !important
 } */
+
+@media (min-width: 992px) {
+    header.masthead .page-heading h1,
+    header.masthead .page-heading .h1,
+    header.masthead .site-heading h1,
+    header.masthead .site-heading .h1 {
+        font-size: 5rem;
+    }
+}

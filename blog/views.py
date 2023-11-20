@@ -1,6 +1,8 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Article, Category
+
 
 # Create your views here.
 
@@ -68,9 +70,17 @@ from .models import Article, Category
 
 def home(request):
 
+    articles_list = Article.objects.published()
+    paginator = Paginator(articles_list, 3)  # Show 3 contacts per page.    
+    page_number = request.GET.get("page_number")
+    print()
+    articles = paginator.get_page(page_number)
+    for article in articles:
+        print(article.title)
     context = {
         # "articles": Article.objects.all()
-        "articles": Article.objects.filter(status='p').order_by('-publish'), # [:2] #bracket shows number of articles that we want to show
+        # "articles": Article.objects.filter(status='p').order_by('-publish'), # [:2] #bracket shows number of articles that we want to show
+        "articles": articles,
         "category": Category.objects.filter(status=True) # [:2] #bracket shows number of articles that we want to show
 
     }
@@ -89,8 +99,19 @@ def detail(request, slug):
     return render(request, "blog/detail.html", context)
 
 def category(request, slug):
+    
+    category = get_object_or_404(Category, slug=slug, status=True)
+    articles_list = category.articles.published()
+    paginator = Paginator(articles_list, 3)  # Show 3 contacts per page.    
+    page_number = request.GET.get("page_number")
+    print()
+    articles = paginator.get_page(page_number)
+    for article in articles:
+        print(article.title)
     context = {
-        "category": get_object_or_404(Category, slug=slug, status="True"),
+        # "category": get_object_or_404(Category, slug=slug, status="True"),
+        "category": category,
+        "articles": articles
     }
     return render(request, "blog/category.html", context)
 

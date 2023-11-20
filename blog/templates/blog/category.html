@@ -23,8 +23,9 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <h3 class="alert alert-primary text-center" style="margin-bottom: 20px; font-size: 32px; font-weight: bold; background-color: #348; color: #fff;">دسته بندی: {{ category.title }}</h3>
-                {% for article in category.articles.published %}
+                <h3 class="alert alert-primary text-center" style="margin-bottom: 20px; font-size: 32px; font-weight: bold; background-color: #348; color: #fff; box-Shadow: 10px 10px 10px #00000080; border: none">دسته بندی: {{ category.title }}</h3>
+                {#{% for article in category.articles %}#}
+                {% for article in articles %}
                     <!-- Post preview-->
                     <div class="post-preview">
                         <a href="{% url 'blog:detail' article.slug%}">
@@ -57,7 +58,18 @@
                 <!-- Pager-->
                 <!-- Mehran use this command to change the posision of older posts button -->
                 <!-- <div class="clearfix pager-botton" >a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>-->
-                <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">پست های قدیمی ←</a></div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 ">
+                        {% if articles.has_previous %}
+                            <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'blog:category' category.slug %}?page_number={{articles.previous_page_number}}">پست های جدید &rarr;</a></div> 
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        {% if articles.has_next %}
+                            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'blog:category' category.slug %}?page_number={{articles.next_page_number}}">پست های قدیمی ←</a></div>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
