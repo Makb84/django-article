@@ -29,3 +29,46 @@ body {
         font-size: 5rem;
     }
 }
+
+
+
+
+/* Optional: Style the dropdown button */
+.dropdown-btn {
+  padding: 10px;
+  background-color: rgba(31, 29, 131, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Optional: Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2b49402d;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Optional: Style the dropdown items */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Optional: Change color on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown content when the dropdown button is hovered over */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
