@@ -1,18 +1,19 @@
 <ul class="">
-    {% for cat in cat.children.all %}
+    {% for cat in cat.children.active %}
 
         <li class="nav-item" >
             <a class="nav-link px-lg-3 py-3 py-lg-4" style="font-family: 'Your Font', sans-serif; font-size: 15px; font-weight: bold; color: rgb(177, 178, 204);" href="{% url 'blog:home' %}" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
-            {% if cat.children.all %}
+            {% if cat.children.active %}
 
                 <!-- <div class="dropdown">
                     <button class="dropdown-btn">{{cat.title}}</button> -->
-                    <div class="dropdown-content">
+                    <div class="submenu dropdown-content" style="">
 
-                        {% include 'blog/partials/category_loop.html' %}                        
+                        {% include 'blog/partials/category_loop.html' %}
+
+                    </div>
                     
-                    <!-- </div>
-                </div> -->
+                <!--</div> -->
             {% endif %}
         </li>
 

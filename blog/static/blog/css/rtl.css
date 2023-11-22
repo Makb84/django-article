@@ -41,6 +41,7 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  
 }
 
 /* Optional: Style the dropdown content (hidden by default) */
@@ -55,6 +56,7 @@ body {
 
 /* Optional: Style the dropdown items */
 .dropdown-content a {
+  display: none;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
@@ -71,4 +73,33 @@ body {
   display: block;
 }
 
+.dropdown-menu > li:hover > .submenu{
+   display: block; 
+}
 
+
+
+/* these are for test dropdown in category_navbar.html. the navbar is now comented */
+
+@media all and (min-width: 992px) {
+	.dropdown-menu li{ position: relative; 	}
+	.nav-item .submenu{ 
+		display: none;
+		position: absolute;
+		left:100%; top:-7px;
+	}
+	.nav-item .submenu-left{ 
+		right:100%; left:auto;
+	}
+	.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{ display: block; }
+}	
+/* ============ desktop view .end// ============ */
+
+/* ============ small devices ============ */
+@media (max-width: 991px) {
+  .dropdown-menu .dropdown-menu{
+      margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+  }
+}	
+============ small devices .end// ============
