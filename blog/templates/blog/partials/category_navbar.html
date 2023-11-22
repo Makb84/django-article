@@ -1,16 +1,21 @@
 
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:home' %}">خانه</a></li>
+            <ul class="navbar-nav ms-auto py-4 py-lg-0" style="font-family: 'Your Font', sans-serif; font-size: 15px; font-weight: bold; color: #ffffff;">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" style="font-family: 'Your Font', sans-serif; font-size: 15px; font-weight: bold; color: #ffffff;" href="{% url 'blog:home' %}">خانه</a></li>
                 {% for cat in category %}
                     
                             {% if cat.parent == None %}
-                            <div class="dropdown">
-                                <button class="dropdown-btn">{{cat.title}}</button>
+                            <!-- <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a> -->
+                            <div class="dropdown" >
+                                <a href="{% url 'blog:category' cat.slug %}">
+                                    <button class="dropdown-btn nav-link px-lg-3 py-3 py-lg-4" >{{cat.title}} </button>
+                                </a>
+                                
+                                <!-- <button class="dropdown-btn" >{{cat.title}}</button> -->
                                 <div class="dropdown-content">
                                     <li class="nav-item">
-                                        <!-- <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a> -->
+                                        
                                         {% if cat.children.all %}
 
                                             {% include 'blog/partials/category_loop.html' %}                        
