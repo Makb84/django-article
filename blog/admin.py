@@ -54,7 +54,7 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'thumbnail_tag', 'slug', 'jpublish', 'created', 'updated', 'status', 'category_to_str')
+    list_display = ('title', 'thumbnail_tag', 'slug', 'author', 'jpublish', 'created', 'updated', 'status', 'category_to_str')
     list_filter = ('publish', 'status',)  # Note: list_filter should be a tuple, not a set
     search_fields = ('title', 'description')
     prepopulated_fields = {'slug': ('title',)}

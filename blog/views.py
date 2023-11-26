@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import Article, Category
@@ -114,4 +115,16 @@ def category(request, slug):
         "articles": articles
     }
     return render(request, "blog/category.html", context)
+
+def author(request, username):
+    author = get_object_or_404(User, username=username)
+    articles = Article.objects.filter(author=author)
+    paginator = Paginator(articles, 3) # Show 3 articles per page.
+    page_number = request.GET.get("page_number")
+    articles = paginator.get_page(page_number)
+    context = {
+        "author": author,
+        "articles": articles
+    }
+    return render(request, "blog/author.html", context)
 
