@@ -38,6 +38,15 @@
 
                     {% endfor %}
 
+                    <p class="post-meta" dir="rtl"">
+                        
+                        {{article.jpublish}}
+                        نویسنده : 
+                        <a href="{% url 'blog:author' article.author %}">{{article.author}}</a>
+                        {% comment %} {{article.jpublish}} {% endcomment %}
+                        
+                    </p>
+
                 </div>
             </div>
         </div>

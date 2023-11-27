@@ -34,9 +34,9 @@
                         </a>
                         <p class="post-meta">
 
-                            نوشته شده توسط : 
-                            <a href="#!">خدادوست</a>
                             {{article.jpublish}}
+                            نوشته شده توسط : 
+                            <a href="{% url 'blog:author' article.author %}">{{article.author}}</a>
                             
                         </p>
 
