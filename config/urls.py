@@ -22,7 +22,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', home)
-    path('', include('blog.urls'))
+    path('', include('blog.urls')),
+    path('account/', include('account.urls')),
 ]
 
 from django.conf import settings
