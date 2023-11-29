@@ -4,6 +4,8 @@ from django.utils.html import format_html
 from django.utils import timezone
 from extensions.utils import jalali_conventor
 
+from django.urls import reverse
+
 
 # my manager
 class ArticleManager(models.Manager):
@@ -85,6 +87,9 @@ class Article(models.Model):
         # return "، ".join([category.title for category in obj.category.all()])
         return "، ".join([category.title for category in self.category_published()])    
     category_to_str.short_description = "دسته بندی"
+
+    def get_absolute_url(self):
+        return reverse("account:home")
     
     
     # Associate the custom manager with the Article model
