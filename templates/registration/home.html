@@ -58,7 +58,7 @@
                             {% endif %}
 
                         </span></td>
-                        <td>{{article.description|truncatewords:30}}</td>
+                        <td>{{article.description|striptags|truncatewords:30}}</td>
                         <td><img src="{{article.thumbnail.url}}" width="120"></td>
 
 
