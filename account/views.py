@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import FieldsMixin
 
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
@@ -28,15 +30,18 @@ def home(request):
     return render(request, 'registration/home.html', context)
 
 
+from .decorators import fields_dispatch
 
-def article_create(request):
-
+@login_required
+@fields_dispatch
+def article_create(request, fields):
+    print(fields)
     # Initialize the form for adding articles    
-    articleaddform = ArticleAddForm()
+    articleaddform = ArticleAddForm(fields=fields)
 
     if request.POST:
         # If the form is submitted, validate the data        
-        articleaddform = ArticleAddForm(request.POST, request.FILES)        
+        articleaddform = ArticleAddForm(request.POST, request.FILES)
         if articleaddform.is_valid():
             # If the form is valid, save the article and redirect to the home page
             articleaddform.save()
@@ -45,6 +50,7 @@ def article_create(request):
 
     context = {
         'form': articleaddform,
+        'fields': fields
     }
 
     return render(request, 'registration/article-create-update.html', context)
