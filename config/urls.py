@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Import your views if needed
 # from blog.views import home
 
 urlpatterns = [
@@ -26,7 +27,9 @@ urlpatterns = [
     path('account/', include('account.urls')),
 ]
 
+# Import Django settings and enable serving media files during development
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Serve media files from MEDIA_ROOT during development
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

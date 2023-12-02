@@ -13,6 +13,7 @@ from blog.forms import ArticleAddForm
 @login_required
 def home(request):
     # articles = Article.objects.published()
+    # Retrieve articles based on user type (superuser or regular user)    
     if request.user.is_superuser:
         articles = Article.objects.all()
     else:
@@ -30,10 +31,14 @@ def home(request):
 
 def article_create(request):
 
+    # Initialize the form for adding articles    
     articleaddform = ArticleAddForm()
+
     if request.POST:
+        # If the form is submitted, validate the data        
         articleaddform = ArticleAddForm(request.POST, request.FILES)        
         if articleaddform.is_valid():
+            # If the form is valid, save the article and redirect to the home page
             articleaddform.save()
 
         return redirect('account:home')

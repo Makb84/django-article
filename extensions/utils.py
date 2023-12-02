@@ -3,7 +3,9 @@ from . import jalali
 from django.utils import timezone
 
 def persian_numbers_convertor(mystr):
-
+    """
+    Convert Latin digits in a string to Persian (Eastern Arabic-Indic) digits.
+    """
     numbers = {
         "0": "۰",
         "1": "۱",
@@ -27,13 +29,16 @@ def persian_numbers_convertor(mystr):
 
 
 def jalali_conventor(time):
+    """
+    Convert a given datetime object to a Persian (Jalali) formatted string.
+    """    
 
     jmonths = ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"]
     
-
+    # Convert time to the local timezone
     time = timezone.localtime(time)
 
-
+    # Convert time to Persian (Jalali) tuple
     time_to_str = "{},{},{}".format(time.year, time.month, time.day)
     time_to_tuple = jalali.Gregorian(time_to_str).persian_tuple()
 
@@ -45,7 +50,7 @@ def jalali_conventor(time):
             time_to_list[1] = month
             break
 
-
+    # Format the output string
     output = "{} {} {}, ساعت {}:{}".format(
         
         time_to_list[2],
@@ -55,4 +60,5 @@ def jalali_conventor(time):
         time.minute,
     )
 
+    # Convert Latin digits in the output to Persian digits
     return persian_numbers_convertor(output)

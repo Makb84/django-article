@@ -8,6 +8,7 @@ from django.utils.translation import ngettext
 
 # admin.site.disable_action("delete_selected")
 
+# Custom admin actions for bulk updating article status
 @admin.action(description="انتشار مقالات انتخاب شده")
 def make_published(modeladmin, request, queryset):
     updated = queryset.update(status="p")
@@ -39,6 +40,8 @@ def make_draft(modeladmin, request, queryset):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    # Configuration for Category model in admin panel
+    
     list_display = ('position', 'title', 'slug', 'parent', 'status')
     list_filter = (['status'])  # Note: list_filter should be a tuple or list, not a set
     search_fields = ('title', 'slug')
@@ -52,8 +55,10 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
-
+# Register the Category model with the custom admin configuration
 class ArticleAdmin(admin.ModelAdmin):
+    # Configuration for Article model in admin panel
+
     list_display = ('title', 'thumbnail_tag', 'slug', 'author', 'jpublish', 'created', 'updated', 'status', 'category_to_str')
     list_filter = ('publish', 'status',)  # Note: list_filter should be a tuple, not a set
     search_fields = ('title', 'description')
@@ -62,6 +67,8 @@ class ArticleAdmin(admin.ModelAdmin):
     actions = [make_published, make_draft]    
 
     def category_to_str(self,obj):
+        # Return a string representation of the categories associated with the article        
+
         # return "، ".join([category.title for category in obj.category.all()])
         return "، ".join([category.title for category in obj.category_published()])    
     category_to_str.short_description = "دسته بندی"
@@ -73,6 +80,7 @@ class ArticleAdmin(admin.ModelAdmin):
     updated.admin_order_field = 'updated'
     updated.short_description = 'Last Updated'
 
+# Register the Article model with the custom admin configuration
 admin.site.register(Article, ArticleAdmin)
 
 

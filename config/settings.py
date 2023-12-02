@@ -16,6 +16,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# LOGIN REDIRECT URL after successful login
 LOGIN_REDIRECT_URL = "account:home"
 LOGIN_URL = "account:login"
 
@@ -29,6 +30,7 @@ SECRET_KEY = 'django-insecure-1cm#&_8c)rm)1ug79$9p(rm4=s(u2@ej6pa_671x_yd-=+i3f%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# List of host/domain names that this Django site can serve
 ALLOWED_HOSTS = []
 
 
@@ -71,6 +73,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Root URL configuration module for this project
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
@@ -89,6 +92,7 @@ TEMPLATES = [
     },
 ]
 
+# Web Server Gateway Interface (WSGI) application
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -144,6 +148,7 @@ STATICFILES_DIRS = [
     # "/var/www/static/",
 ]
 
+# Media files (uploads) configuration
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -152,6 +157,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Settings for crispy-forms and bootstrap5
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"

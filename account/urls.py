@@ -7,10 +7,15 @@ from django.contrib.auth import views
 from django.urls import path
 from .views import home,article_create
 
+# Set the app namespace for reverse URL patterns
 app_name = 'account'
 
 urlpatterns = [
+    # -----Login view using Django's built-in LoginView-----
     path("login/", views.LoginView.as_view(), name="login"),
+
+    # -----Other authentication-related views (commented out for simplicity)-----
+    
     # path("logout/", views.LogoutView.as_view(), name="logout"),
     # path(
     #     "password_change/", views.PasswordChangeView.as_view(), name="password_change"
@@ -40,8 +45,9 @@ urlpatterns = [
 
 
 urlpatterns += [
-
+    # Home view for the 'account' app
     path('', home, name="home"),
+    # View to create an article in the 'account' app
     path('article/create', article_create, name="article-create"),
 
 ]

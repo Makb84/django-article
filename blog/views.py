@@ -68,7 +68,7 @@ from .models import Article, Category
 
 
 
-
+# Home view - paginated list of published articles
 def home(request):
 
     articles_list = Article.objects.published()
@@ -88,6 +88,7 @@ def home(request):
 
     return render(request, "blog/home.html", context)
 
+# Detail view for a specific article
 def detail(request, slug):
 
     context = {
@@ -99,6 +100,7 @@ def detail(request, slug):
 
     return render(request, "blog/detail.html", context)
 
+# Category view - paginated list of articles in a specific category
 def category(request, slug):
     
     category = get_object_or_404(Category, slug=slug, status=True)
@@ -116,6 +118,7 @@ def category(request, slug):
     }
     return render(request, "blog/category.html", context)
 
+# Author view - paginated list of articles by a specific author
 def author(request, username):
     author = get_object_or_404(User, username=username)
     articles = Article.objects.filter(author=author)
