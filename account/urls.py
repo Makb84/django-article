@@ -5,7 +5,7 @@
 
 from django.contrib.auth import views
 from django.urls import path
-from .views import home, article_create, article_update
+from .views import home, article_create, article_update, article_delete
 
 # Set the app namespace for reverse URL patterns
 app_name = 'account'
@@ -50,5 +50,6 @@ urlpatterns += [
     # View to create an article in the 'account' app
     path('article/create', article_create, name="article-create"),
     path('article/update/<slug:slug>', article_update, name="article-update"),
+    path('article/delete/<slug:slug>', article_delete, name="article-delete"),
 
 ]

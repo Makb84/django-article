@@ -41,12 +41,14 @@
                 <tbody>
 
                     {% for article in articles %}
-                    <tr>
+                    <tr class='post-row'>
                         <td>{{forloop.counter}}</td>
                         {% if request.user.is_superuser %}
-                          <td><a href="{% url 'account:article-update' article.slug %}">{{article.slug}}</a></td>
+                          <td><a href="{% url 'account:article-update' article.slug %}">{{article.slug}}</a><br><br>
+                            <a href="{% url 'account:article-delete' article.slug %}">پاک کردن مقاله</a></td>
                         {% elif article.status == 'd' %}
-                          <td><a href="{% url 'account:article-update' article.slug %}">{{article.slug}}</a></td>
+                          <td><a href="{% url 'account:article-update' article.slug %}">{{article.slug}}</a><br><br>
+                            <a href="{% url 'account:article-delete' article.slug %}">پاک کردن مقاله</a></td>
                         {% elif article.status == 'p' %}
                           <td>{{article.slug}}</td>
                         {% endif %}
@@ -80,3 +82,13 @@
         </div>
       </div>
 {% endblock %}
+
+{% comment %} {% block scripts %}
+<script>
+  $(document).ready(function(){
+    $(".post-row").on('click', function(){
+      alert($(this).html());
+    });
+  });
+</script>
+{% endblock %} {% endcomment %}

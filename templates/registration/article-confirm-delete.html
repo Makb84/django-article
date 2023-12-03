@@ -1,0 +1,21 @@
+{% extends 'registration/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    پاک کردن مقاله
+{% endblock %}
+
+{% block main %}
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        Are you want to delete {{slug}} ?
+        <input type="submit" value="Yes" />
+        <a href="{% url 'account:home' %}">Cancel </a>
+    </form>
+</div>
+
+{% endblock %}

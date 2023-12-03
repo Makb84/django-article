@@ -63,7 +63,7 @@ def article_create(request, fields):
     return render(request, 'registration/article-create-update.html', context)
         
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 
 
 
@@ -71,7 +71,7 @@ from django.http import HttpResponseForbidden
 @fields_dispatch
 def article_update(request, fields, slug):
     # print(fields)
-    # Initialize the form for adding articles
+    # Initialize the form for update articles
     print(slug)
     article = get_object_or_404(Article, slug=slug)
     # if not request.user.is_superuser and request.user != article.author:
@@ -107,4 +107,25 @@ def article_update(request, fields, slug):
     }
 
     return render(request, 'registration/article-create-update.html', context)
+
+
+@login_required
+def article_delete(request, slug):
+    # Initialize the form for delete articles
+    article = get_object_or_404(Article, slug=slug)
+    
+    if (not request.user.is_superuser) and (request.user != article.author or (request.user == article.author and article.status == 'p')):
+        return HttpResponseForbidden("You do not have permission to delete this article.")
+
+    if request.POST:
+        
+        article.delete()
+        return redirect('account:home')
+
+    context = {
+
+        'slug': article.slug
+    }
+
+    return render(request, 'registration/article-confirm-delete.html', context)
         
