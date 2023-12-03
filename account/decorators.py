@@ -2,7 +2,7 @@ from django.http import Http404
 
 def fields_dispatch(view_func):
     def wrapper(request, *args, **kwargs):
-        print(**kwargs)
+        # print(**kwargs)
         if request.user.is_superuser:
             print("this is superuser check")
             fields = [
