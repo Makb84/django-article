@@ -16,7 +16,7 @@ urlpatterns = [
 
     # -----Other authentication-related views (commented out for simplicity)-----
     
-    # path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("logout/", views.LogoutView.as_view(), name="logout"),
     # path(
     #     "password_change/", views.PasswordChangeView.as_view(), name="password_change"
     # ),

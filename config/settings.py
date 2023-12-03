@@ -20,6 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 LOGIN_REDIRECT_URL = "account:home"
 LOGIN_URL = "account:login"
 
+# LOGOUT REDIRECT URL after successful login. We can overwrite the logged_out.html and add this to registeration's template. (Default: Redirect to django admin pannel logged_out.html)
+LOGOUT_REDIRECT_URL = "account:login"
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
